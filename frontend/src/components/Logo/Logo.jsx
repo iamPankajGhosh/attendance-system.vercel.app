@@ -1,3 +1,5 @@
+import PropTypes from "prop-types";
+
 function Logo({ width }) {
   return (
     <img
@@ -9,3 +11,7 @@ function Logo({ width }) {
 }
 
 export default Logo;
+
+Logo.propTypes = {
+  width: PropTypes.string.isRequired,
+};

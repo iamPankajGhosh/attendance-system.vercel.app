@@ -8,7 +8,15 @@ import {
   Route,
 } from "react-router-dom";
 
-import { Root, Home, Error } from "./routes";
+import {
+  Root,
+  Home,
+  Error,
+  Login,
+  Signup,
+  Dashboard,
+  AddStudent,
+} from "./routes";
 
 import "./index.css";
 
@@ -16,6 +24,10 @@ const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Root />} errorElement={<Error />}>
       <Route index element={<Home />} />
+      <Route path="login" element={<Login />} />
+      <Route path="signup" element={<Signup />} />
+      <Route path="dashboard" element={<Dashboard />} />
+      <Route path="addstudent" element={<AddStudent />} />
     </Route>
   )
 );

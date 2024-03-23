@@ -1,21 +1,6 @@
 import { useState } from "react";
-import { Menu, X, ChevronRight } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import Logo from "../Logo/Logo";
-
-const menuItems = [
-  {
-    name: "Home",
-    href: "#",
-  },
-  {
-    name: "About",
-    href: "#",
-  },
-  {
-    name: "Contact",
-    href: "#",
-  },
-];
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -30,21 +15,7 @@ export default function Header() {
         <div className="inline-flex items-center space-x-2">
           <Logo width="80" />
         </div>
-        <div className="hidden grow items-start lg:flex">
-          <ul className="ml-12 inline-flex space-x-8">
-            {menuItems.map((item) => (
-              <li key={item.name}>
-                <a
-                  href={item.href}
-                  className="inline-flex items-center text-sm font-semibold text-gray-800 hover:text-gray-900"
-                >
-                  {item.name}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
-        <div className="hidden space-x-2 lg:block">
+        <div className="flex items-center gap-3">
           <button
             type="button"
             className="rounded-md bg-transparent px-3 py-2 text-sm font-semibold text-black hover:bg-black/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
@@ -57,6 +28,13 @@ export default function Header() {
           >
             Log In
           </button>
+          <div className="avatar">
+            <img
+              className="relative z-10 inline-block h-10 w-10 rounded-full ring-2 ring-white"
+              src="https://leerob.io/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Favatar.b1d1472f.jpg&amp;w=256&amp;q=75"
+              alt="Lee_Robinson"
+            />
+          </div>
         </div>
         <div className="lg:hidden">
           <Menu onClick={toggleMenu} className="h-6 w-6 cursor-pointer" />
@@ -94,30 +72,12 @@ export default function Header() {
                     </button>
                   </div>
                 </div>
-                <div className="mt-6">
-                  <nav className="grid gap-y-4">
-                    {menuItems.map((item) => (
-                      <a
-                        key={item.name}
-                        href={item.href}
-                        className="-m-3 flex items-center rounded-md p-3 text-sm font-semibold hover:bg-gray-50"
-                      >
-                        <span className="ml-3 text-base font-medium text-gray-900">
-                          {item.name}
-                        </span>
-                        <span>
-                          <ChevronRight className="ml-3 h-4 w-4" />
-                        </span>
-                      </a>
-                    ))}
-                  </nav>
-                </div>
                 <div className="mt-2 space-y-2">
                   <button
                     type="button"
                     className="w-full rounded-md border border-black px-3 py-2 text-sm font-semibold text-black shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
                   >
-                    Sign In
+                    Sign Up
                   </button>
                   <button
                     type="button"
