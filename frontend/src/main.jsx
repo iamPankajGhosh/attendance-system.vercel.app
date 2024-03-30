@@ -16,6 +16,7 @@ import {
   Signup,
   Dashboard,
   AddStudent,
+  Profile,
 } from "./routes";
 
 import "./index.css";
@@ -28,6 +29,7 @@ const router = createBrowserRouter(
       <Route path="signup" element={<Signup />} />
       <Route path="dashboard" element={<Dashboard />} />
       <Route path="addstudent" element={<AddStudent />} />
+      <Route path="profile" element={<Profile />} />
     </Route>
   )
 );

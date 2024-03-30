@@ -1,8 +1,8 @@
 export default function Home() {
   return (
     <div className="relative w-full">
-      <div className="relative isolate z-0 bg-white px-6 pt-14 lg:px-8">
-        <div className="relative mx-auto max-w-2xl py-24">
+      <div className="relative isolate z-0 bg-white px-6 lg:px-8">
+        <div className="relative mx-auto max-w-2xl py-16">
           <div className="absolute inset-x-0 -top-[4rem] -z-10 transform-gpu overflow-hidden blur-3xl md:-top-[10rem]">
             <svg
               className="relative left-[calc(50%-11rem)] -z-10 h-[21.1875rem] max-w-none -translate-x-1/2 rotate-[30deg] sm:left-[calc(50%-30rem)] sm:h-[42.375rem]"
@@ -30,10 +30,10 @@ export default function Home() {
             </svg>
           </div>
           <div className="text-center">
-            <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
+            <h1 className="text-4xl font-bold tracking-tight text-purple-950 sm:text-6xl">
               Lorem ipsum dolor sit amet consectetur dicta.
             </h1>
-            <p className="mt-6 text-lg leading-8 text-gray-600">
+            <p className="mt-6 text-lg leading-8 text-fuchsia-950">
               Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui
               lorem cupidatat commodo. Elit sunt amet fugiat veniam occaecat
               fugiat aliqua.
@@ -41,7 +41,7 @@ export default function Home() {
             <div className="mt-10 flex items-center justify-center gap-x-2">
               <button
                 type="button"
-                className="rounded-md bg-black px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+                className="rounded-md bg-red-700 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
               >
                 View Docs
               </button>

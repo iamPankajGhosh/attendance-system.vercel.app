@@ -1,40 +1,48 @@
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import Logo from "../Logo/Logo";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const navigate = useNavigate();
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
   return (
-    <header className="relative w-full bg-white">
+    <header className="relative w-full bg-white border shadow">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-2 sm:px-6 lg:px-8">
         <div className="inline-flex items-center space-x-2">
-          <Logo width="80" />
+          <Link to="/">
+            <Logo width="80" />
+          </Link>
         </div>
         <div className="flex items-center gap-3">
           <button
             type="button"
             className="rounded-md bg-transparent px-3 py-2 text-sm font-semibold text-black hover:bg-black/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+            onClick={() => navigate("/signup")}
           >
             Sign Up
           </button>
           <button
             type="button"
             className="rounded-md border border-black px-3 py-2 text-sm font-semibold text-black shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+            onClick={() => navigate("/login")}
           >
             Log In
           </button>
-          <div className="avatar">
-            <img
-              className="relative z-10 inline-block h-10 w-10 rounded-full ring-2 ring-white"
-              src="https://leerob.io/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Favatar.b1d1472f.jpg&amp;w=256&amp;q=75"
-              alt="Lee_Robinson"
-            />
-          </div>
+          <Link to="/profile">
+            <div className="avatar">
+              <img
+                className="relative z-10 inline-block h-10 w-10 rounded-full ring-2 ring-white"
+                src="https://leerob.io/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Favatar.b1d1472f.jpg&amp;w=256&amp;q=75"
+                alt="Lee_Robinson"
+              />
+            </div>
+          </Link>
         </div>
         <div className="lg:hidden">
           <Menu onClick={toggleMenu} className="h-6 w-6 cursor-pointer" />
