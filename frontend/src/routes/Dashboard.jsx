@@ -1,10 +1,9 @@
-import { Sidebar, Table } from "../components";
+import { Sidebar } from "../components";
 
 function Dashboard() {
   return (
     <div className="container flex">
       <Sidebar />
-      <Table />
     </div>
   );
 }

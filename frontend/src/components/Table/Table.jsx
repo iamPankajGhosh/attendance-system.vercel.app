@@ -23,27 +23,29 @@ const people = [
   },
 ];
 
-export default function Table() {
+export default function Table({ title = "Users", removeBtn }) {
   const navigate = useNavigate();
   return (
     <section className="mx-auto w-full max-w-7xl px-4 py-4 flex flex-col">
       <div className="flex flex-col space-y-4  md:flex-row md:items-center md:justify-between md:space-y-0">
         <div>
-          <h2 className="text-lg font-semibold">Students</h2>
+          <h2 className="text-lg font-semibold">{title}</h2>
           <p className="mt-1 text-sm text-gray-700">
-            This is a list of all students. You can add new students, edit or
+            This is a list of all {title}. You can add new students, edit or
             delete existing ones.
           </p>
         </div>
-        <div>
-          <button
-            type="button"
-            onClick={() => navigate("/addstudent")}
-            className="rounded-md bg-black px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
-          >
-            Add new student
-          </button>
-        </div>
+        {!removeBtn && (
+          <div>
+            <button
+              type="button"
+              onClick={() => navigate("/addstudent")}
+              className="rounded-md bg-black px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-black/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+            >
+              Add new {title}
+            </button>
+          </div>
+        )}
       </div>
       <div className="mt-6 flex flex-col grow">
         <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">

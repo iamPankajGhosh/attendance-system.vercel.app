@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import Logo from "../Logo/Logo";
 import { Link, useNavigate } from "react-router-dom";
+import { Button } from "../index";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -20,20 +21,15 @@ export default function Header() {
           </Link>
         </div>
         <div className="flex items-center gap-3">
-          <button
-            type="button"
-            className="rounded-md bg-transparent px-3 py-2 text-sm font-semibold text-black hover:bg-black/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
-            onClick={() => navigate("/signup")}
-          >
-            Sign Up
-          </button>
-          <button
-            type="button"
-            className="rounded-md border border-black px-3 py-2 text-sm font-semibold text-black shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
-            onClick={() => navigate("/login")}
-          >
-            Log In
-          </button>
+          <Button
+            type="secondary"
+            title="Sign Up"
+            goto="/signup"
+            bgColor="white"
+            textColor="black"
+          />
+          <Button type="primary" title="Log In" goto="/login" />
+
           <Link to="/profile">
             <div className="avatar">
               <img

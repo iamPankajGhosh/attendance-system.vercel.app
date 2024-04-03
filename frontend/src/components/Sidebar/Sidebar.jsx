@@ -26,7 +26,7 @@ export default function Sidebar() {
             </Link>
             <Link
               className="flex transform items-center rounded-lg px-3 py-2 text-gray-600 transition-colors duration-300 hover:bg-gray-100 hover:text-gray-700"
-              to="#"
+              to="/attendance"
             >
               <Wallet className="h-5 w-5" aria-hidden="true" />
               <span className="mx-2 text-sm font-medium">Attendance</span>
@@ -38,21 +38,21 @@ export default function Sidebar() {
             </label>
             <Link
               className="flex transform items-center rounded-lg px-3 py-2 text-gray-600 transition-colors duration-300 hover:bg-gray-100 hover:text-gray-700"
-              to="#"
+              to="/students"
             >
               <Newspaper className="h-5 w-5" aria-hidden="true" />
               <span className="mx-2 text-sm font-medium">Students</span>
             </Link>
             <Link
               className="flex transform items-center rounded-lg px-3 py-2 text-gray-600 transition-colors duration-300 hover:bg-gray-100 hover:text-gray-700"
-              to="#"
+              to="/teachers"
             >
               <BellRing className="h-5 w-5" aria-hidden="true" />
               <span className="mx-2 text-sm font-medium">Teachers</span>
             </Link>
             <Link
               className="flex transform items-center rounded-lg px-3 py-2 text-gray-600 transition-colors duration-300 hover:bg-gray-100 hover:text-gray-700"
-              to="#"
+              to="/allusers"
             >
               <Paperclip className="h-5 w-5" aria-hidden="true" />
               <span className="mx-2 text-sm font-medium">All Users</span>
