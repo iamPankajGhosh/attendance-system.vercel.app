@@ -1,4 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
+import UserData from "../UserData";
 
 const people = [
   {
@@ -6,7 +7,7 @@ const people = [
     title: "Front-end Developer",
     department: "Engineering",
     email: "john@devui.com",
-    role: "Developer",
+    roll: "Developer",
     image:
       "https://images.unsplash.com/photo-1628157588553-5eeea00af15c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1160&q=80",
     isActive: true,
@@ -16,7 +17,17 @@ const people = [
     title: "Back-end Developer",
     department: "Engineering",
     email: "jane@devui.com",
-    role: "CTO",
+    roll: "CTO",
+    image:
+      "https://images.unsplash.com/photo-1639149888905-fb39731f2e6c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=928&q=80",
+    isActive: true,
+  },
+  {
+    name: "Jane Doe",
+    title: "Back-end Developer",
+    department: "Engineering",
+    email: "jane@devui.com",
+    roll: "CTO",
     image:
       "https://images.unsplash.com/photo-1639149888905-fb39731f2e6c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=928&q=80",
     isActive: true,
@@ -87,48 +98,15 @@ export default function Table({ title = "Users", removeBtn }) {
                 </thead>
                 <tbody className="divide-y divide-gray-200 bg-white">
                   {people.map((person) => (
-                    <tr key={person.name}>
-                      <td className="whitespace-nowrap px-4 py-4">
-                        <div className="flex items-center">
-                          <div className="h-10 w-10 flex-shrink-0">
-                            <img
-                              className="h-10 w-10 rounded-full object-cover"
-                              src={person.image}
-                              alt=""
-                            />
-                          </div>
-                          <div className="ml-4">
-                            <div className="text-sm font-medium text-gray-900">
-                              {person.name}
-                            </div>
-                            <div className="text-sm text-gray-700">
-                              {person.email}
-                            </div>
-                          </div>
-                        </div>
-                      </td>
-                      <td className="whitespace-nowrap px-12 py-4">
-                        <div className="text-sm text-gray-900 ">
-                          {person.title}
-                        </div>
-                        <div className="text-sm text-gray-700">
-                          {person.department}
-                        </div>
-                      </td>
-                      <td className="whitespace-nowrap px-4 py-4">
-                        <button className="inline-flex rounded-full bg-green-100 px-2 text-xs font-semibold leading-5 text-green-800">
-                          {person.isActive ? "Active" : "Inactive"}
-                        </button>
-                      </td>
-                      <td className="whitespace-nowrap px-4 py-4 text-sm text-gray-700">
-                        {person.role}
-                      </td>
-                      <td className="whitespace-nowrap px-4 py-4 text-right text-sm font-medium">
-                        <Link to="#" className="text-gray-700">
-                          Edit
-                        </Link>
-                      </td>
-                    </tr>
+                    <UserData
+                      key={person.name}
+                      name={person.name}
+                      image={person.image}
+                      title={person.title}
+                      department={person.department}
+                      isActive={person.isActive}
+                      roll={person.roll}
+                    />
                   ))}
                 </tbody>
               </table>

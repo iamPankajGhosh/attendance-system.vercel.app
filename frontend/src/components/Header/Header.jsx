@@ -21,13 +21,7 @@ export default function Header() {
           </Link>
         </div>
         <div className="flex items-center gap-3">
-          <Button
-            type="secondary"
-            title="Sign Up"
-            goto="/signup"
-            bgColor="white"
-            textColor="black"
-          />
+          <Button type="secondary" title="Sign up" goto="/signup" />
           <Button type="primary" title="Log In" goto="/login" />
 
           <Link to="/profile">

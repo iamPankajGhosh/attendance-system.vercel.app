@@ -12,7 +12,8 @@ export default function Button({
   return type.toLowerCase() === "secondary" ? (
     <button
       type="button"
-      className={`rounded-md bg-${bgColor} px-3 py-2 text-sm font-semibold text-${textColor} shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black`}
+      className="rounded-md border-black px-3 py-2 text-sm font-semibold text-black shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+      onClick={() => navigate(goto)}
     >
       {title}
     </button>
@@ -30,4 +31,7 @@ export default function Button({
 Button.propTypes = {
   type: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
+  textColor: PropTypes.string,
+  bgColor: PropTypes.string,
+  goto: PropTypes.string,
 };

@@ -5,6 +5,7 @@ import {
   BellRing,
   Paperclip,
   Wrench,
+  Shapes,
 } from "lucide-react";
 import { Link } from "react-router-dom";
 
@@ -38,11 +39,12 @@ export default function Sidebar() {
             </label>
             <Link
               className="flex transform items-center rounded-lg px-3 py-2 text-gray-600 transition-colors duration-300 hover:bg-gray-100 hover:text-gray-700"
-              to="/students"
+              to="/teachers"
             >
-              <Newspaper className="h-5 w-5" aria-hidden="true" />
-              <span className="mx-2 text-sm font-medium">Students</span>
+              <Shapes className="h-5 w-5" aria-hidden="true" />
+              <span className="mx-2 text-sm font-medium">Create classes</span>
             </Link>
+
             <Link
               className="flex transform items-center rounded-lg px-3 py-2 text-gray-600 transition-colors duration-300 hover:bg-gray-100 hover:text-gray-700"
               to="/teachers"
@@ -50,6 +52,15 @@ export default function Sidebar() {
               <BellRing className="h-5 w-5" aria-hidden="true" />
               <span className="mx-2 text-sm font-medium">Teachers</span>
             </Link>
+
+            <Link
+              className="flex transform items-center rounded-lg px-3 py-2 text-gray-600 transition-colors duration-300 hover:bg-gray-100 hover:text-gray-700"
+              to="/students"
+            >
+              <Newspaper className="h-5 w-5" aria-hidden="true" />
+              <span className="mx-2 text-sm font-medium">Students</span>
+            </Link>
+
             <Link
               className="flex transform items-center rounded-lg px-3 py-2 text-gray-600 transition-colors duration-300 hover:bg-gray-100 hover:text-gray-700"
               to="/allusers"
