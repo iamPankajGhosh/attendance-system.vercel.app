@@ -1,6 +1,6 @@
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
-import Images from "../assests/images";
+import Images from "../assets/images";
 import axios from "axios";
 import { useState } from "react";
 
