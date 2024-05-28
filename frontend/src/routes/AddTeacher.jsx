@@ -3,15 +3,14 @@ import axios from "axios";
 import { useState } from "react";
 import { ArrowRight } from "lucide-react";
 
-function AddStudent() {
+function AddTeacher() {
   const [isLoading, setIsloading] = useState(false);
 
-  const [studentData, setStudentData] = useState({
+  const [teacherData, setTeacherData] = useState({
     name: "",
-    rollNumber: "",
-    semester: "",
+    teacherId: "",
     email: "",
-    role: "student",
+    role: "teacher",
     password: "",
   });
 
@@ -23,8 +22,8 @@ function AddStudent() {
 
     try {
       const res = await axios.post(
-        "http://localhost:8000/api/v1/students/register",
-        studentData
+        "http://localhost:8000/api/v1/teachers/register",
+        teacherData
       );
 
       console.log(res);
@@ -32,19 +31,18 @@ function AddStudent() {
 
       // reset all data
       (() => {
-        setStudentData({
+        setTeacherData({
           name: "",
-          rollNumber: "",
-          semester: "",
+          teacherId: "",
           email: "",
           role: "",
           password: "",
         });
       })();
 
-      alert("Student Registered Successfully");
+      alert("Teacher Registered Successfully");
     } catch (error) {
-      console.log("Error :: register students", error);
+      console.log("Error :: register teacher", error);
     }
   };
   return (
@@ -67,10 +65,10 @@ function AddStudent() {
                 placeholder="Full Name"
                 id="name"
                 name="name"
-                value={studentData.name}
+                value={teacherData.name}
                 onChange={(e) =>
-                  setStudentData({
-                    ...studentData,
+                  setTeacherData({
+                    ...teacherData,
                     name: e.target.value,
                   })
                 }
@@ -84,48 +82,20 @@ function AddStudent() {
               className="text-base font-medium text-gray-900"
             >
               {" "}
-              Roll Number{" "}
+              Teacher Id{" "}
             </label>
             <div className="mt-2">
               <input
                 className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
                 type="text"
-                placeholder="Roll Number"
-                id="rollnumber"
-                name="rollnumber"
-                value={studentData.rollNumber}
+                placeholder="Teacher Id"
+                id="teacherid"
+                name="teacherid"
+                value={teacherData.teacherId}
                 onChange={(e) =>
-                  setStudentData({
-                    ...studentData,
-                    rollNumber: e.target.value,
-                  })
-                }
-              ></input>
-            </div>
-          </div>
-
-          <div>
-            <label
-              htmlFor="name"
-              className="text-base font-medium text-gray-900"
-            >
-              Semester{" "}
-              <span className="text-sm text-zinc-500">
-                (like : 1st, 2nd, 3rd, 4th, 5th, 6th)
-              </span>
-            </label>
-            <div className="mt-2">
-              <input
-                className="flex h-10 w-full rounded-md border border-gray-300 bg-transparent px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 focus:ring-gray-400 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
-                type="text"
-                placeholder="Semester"
-                id="semester"
-                name="semester"
-                value={studentData.semester}
-                onChange={(e) =>
-                  setStudentData({
-                    ...studentData,
-                    semester: e.target.value,
+                  setTeacherData({
+                    ...teacherData,
+                    teacherId: e.target.value,
                   })
                 }
               ></input>
@@ -147,10 +117,10 @@ function AddStudent() {
                 placeholder="Email"
                 id="email"
                 name="email"
-                value={studentData.email}
+                value={teacherData.email}
                 onChange={(e) =>
-                  setStudentData({
-                    ...studentData,
+                  setTeacherData({
+                    ...teacherData,
                     email: e.target.value,
                   })
                 }
@@ -174,10 +144,10 @@ function AddStudent() {
                 placeholder="Password"
                 id="password"
                 name="password"
-                value={studentData.password}
+                value={teacherData.password}
                 onChange={(e) =>
-                  setStudentData({
-                    ...studentData,
+                  setTeacherData({
+                    ...teacherData,
                     password: e.target.value,
                   })
                 }
@@ -189,7 +159,7 @@ function AddStudent() {
               type="submit"
               className="inline-flex w-full items-center justify-center rounded-md bg-black px-3.5 py-2.5 font-semibold leading-7 text-white hover:bg-black/80"
             >
-              {!isLoading ? "Add student" : "Loading..."}
+              {!isLoading ? "Add teacher" : "Loading..."}
               {!isLoading && <ArrowRight className="ml-2" size={16} />}
             </button>
           </div>
@@ -199,4 +169,4 @@ function AddStudent() {
   );
 }
 
-export default AddStudent;
+export default AddTeacher;

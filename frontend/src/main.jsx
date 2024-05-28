@@ -1,5 +1,5 @@
-import React from "react";
 import ReactDOM from "react-dom/client";
+import React from "react";
 
 import {
   createBrowserRouter,
@@ -25,12 +25,13 @@ import "./index.css";
 import Attendance from "./routes/Attendance";
 import MySubjects from "./routes/MySubjects";
 import Schedule from "./routes/Schedule";
+import AddTeacher from "./routes/AddTeacher";
 
-const token = localStorage.getItem("token");
-const role = localStorage.getItem("role");
+const isAdmin = function () {
+  const token = localStorage.getItem("token");
+  const role = localStorage.getItem("role");
 
-const isAdmin = () => {
-  if (role === "admin" && token) {
+  if (token && role === "admin") {
     return true;
   }
 };
@@ -38,21 +39,18 @@ const isAdmin = () => {
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Root />} errorElement={<Error />}>
-      {token ? (
-        <Route path="allusers" element={<AllUsers />} />
-      ) : (
-        <Route index element={<Home />} />
-      )}
-      {!token && <Route path="login" element={<Login />} />}
-      {role !== "admin" && <Route path="signup" element={<Signup />} />}
-      {isAdmin && <Route path="addstudent" element={<AddStudent />} />}
-      {token && <Route path="profile" element={<Profile />} />}
-      {token && <Route path="attendance" element={<Attendance />} />}
-      {token && <Route path="students" element={<Students />} />}
-      {token && <Route path="teachers" element={<Teachers />} />}
+      <Route index element={<Home />} />
+      <Route path="login" element={<Login />} />
+      <Route path="signup" element={<Signup />} />
+      <Route path="addstudent" element={<AddStudent />} />
+      <Route path="profile" element={<Profile />} />
+      <Route path="attendance" element={<Attendance />} />
+      <Route path="students" element={<Students />} />
+      <Route path="teachers" element={<Teachers />} />
+      {isAdmin && <Route path="addteacher" element={<AddTeacher />} />}
       {isAdmin && <Route path="allusers" element={<AllUsers />} />}
-      {token && <Route path="mysubjects" element={<MySubjects />} />}
-      {token && <Route path="schedule" element={<Schedule />} />}
+      <Route path="mysubjects" element={<MySubjects />} />
+      <Route path="schedule" element={<Schedule />} />
     </Route>
   )
 );

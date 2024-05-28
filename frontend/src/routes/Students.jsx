@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react";
 import { Sidebar } from "../components";
 import axios from "axios";
+import { ArrowRight } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 export default function Students() {
+  const navigate = useNavigate();
   const [people, setPeople] = useState([]);
 
   useEffect(() => {
@@ -28,6 +31,15 @@ export default function Students() {
           <div>
             <h2 className="text-lg font-semibold">All Students</h2>
           </div>
+
+          <button
+            type="button"
+            className="inline-flex items-center rounded-md bg-black px-3 py-2 text-sm font-semibold text-white hover:bg-black/80"
+            onClick={() => navigate("/addstudent")}
+          >
+            Add students
+            <ArrowRight className="ml-2 h-4 w-4" />
+          </button>
         </div>
         <div className="mt-6 flex flex-col">
           <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -48,8 +60,23 @@ export default function Students() {
                       >
                         Role
                       </th>
-                      <th scope="col" className="relative px-4 py-3.5">
-                        <span className="sr-only">Edit</span>
+                      <th
+                        scope="col"
+                        className="px-12 py-3.5 text-left text-sm font-normal text-gray-700"
+                      >
+                        Roll Number
+                      </th>
+                      <th
+                        scope="col"
+                        className="px-12 py-3.5 text-left text-sm font-normal text-gray-700"
+                      >
+                        Semester
+                      </th>
+                      <th
+                        scope="col"
+                        className="px-12 py-3.5 text-left text-sm font-normal text-gray-700"
+                      >
+                        Attendance
                       </th>
                     </tr>
                   </thead>
@@ -78,6 +105,22 @@ export default function Students() {
                         <td className="whitespace-nowrap px-12 py-4">
                           <div className="text-sm text-gray-900 ">
                             {person.role.toUpperCase()}
+                          </div>
+                        </td>
+                        <td className="whitespace-nowrap px-12 py-4">
+                          <div className="text-sm text-gray-900 ">
+                            {person.rollNumber}
+                          </div>
+                        </td>
+                        <td className="whitespace-nowrap px-12 py-4">
+                          <div className="text-sm text-gray-900 ">
+                            {person.semester}
+                          </div>
+                        </td>
+                        <td className="whitespace-nowrap px-12 py-4">
+                          <div className="text-sm text-gray-900 ">
+                            🎒
+                            {person.attendance.length}
                           </div>
                         </td>
                       </tr>

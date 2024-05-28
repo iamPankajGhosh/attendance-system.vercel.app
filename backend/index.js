@@ -5,6 +5,7 @@ import cors from "cors";
 import { Student, Attendance } from "./models/student.models.js";
 import { Teacher } from "./models/teacher.models.js";
 import moment from "moment/moment.js";
+import { Admin } from "./models/admin.models.js";
 
 const app = express();
 dotenv.config();
@@ -55,23 +56,48 @@ app.post("/api/v1/students/attendance", async (req, res) => {
       return res.status(404).json({ error: "Student not found" });
     }
 
-    // Create a new attendance document
-    const attendance = new Attendance({
+    const haveAttendance = await Attendance.findOne({
       studentId,
       date: moment().format("MMM Do YY"),
-      present: true,
     });
 
-    // Save the attendance document
-    const savedAttendance = await attendance.save();
+    if (!haveAttendance) {
+      const attendance = new Attendance({
+        studentId,
+        date: moment().format("MMM Do YY"),
+        present: true,
+      });
+      const savedAttendance = await attendance.save();
+      student.attendance.push(savedAttendance._id);
+      await student.save();
+      res.status(200).json("success");
+    } else {
+      haveAttendance.present = true;
+      await haveAttendance.save();
+      res.status(200).json("success");
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
 
-    // Add the attendance document ID to the student's attendance array
-    student.attendance.push(savedAttendance._id);
+// get current user
+app.post("/api/v1/users/currentuser", async (req, res) => {
+  try {
+    const { userId } = req.body;
 
-    // Save the updated student document
-    await student.save();
+    // Find the user by ID
+    const user =
+      (await Student.findById(userId)) ||
+      (await Teacher.findById(userId)) ||
+      (await Admin.findById(userId));
 
-    res.status(200).json("success");
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
+
+    res.status(200).json(user);
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: "Internal server error" });
@@ -114,16 +140,37 @@ app.get("/api/v1/teachers/allteachers", async (req, res) => {
 app.post("/api/v1/users/login", async (req, res) => {
   try {
     const { email, password } = req.body;
-    const student = await Student.findOne({ email, password });
-    const teacher = await Teacher.findOne({ email, password });
 
-    if (student || teacher) {
-      res.status(200).json("success");
-    } else {
-      res.status(401).json({ error: "Invalid email or password" });
-    }
+    const user =
+      (await Student.findOne({ email, password })) ||
+      (await Teacher.findOne({ email, password })) ||
+      (await Admin.findOne({ email, password }));
+
+    res.status(200).json({
+      userId: user._id,
+      success: true,
+      message: "Login successful",
+    });
   } catch (err) {
     res.status(400).json({ error: err.message });
+  }
+});
+
+// delete user endpoint
+app.post("/api/v1/users/deleteuser", async (req, res) => {
+  try {
+    const { userId } = req.body;
+
+    // Find the user by ID
+    const user =
+      (await Student.findByIdAndDelete(userId)) ||
+      (await Teacher.findByIdAndDelete(userId)) ||
+      (await Admin.findByIdAndDelete(userId));
+
+    res.status(200).json({ message: "User deleted successfully" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal server error" });
   }
 });
 

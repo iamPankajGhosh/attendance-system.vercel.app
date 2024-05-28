@@ -8,6 +8,7 @@ import Profile from "./Profile";
 import { default as Students } from "./Students";
 import { default as Teachers } from "./Teachers";
 import { default as AllUsers } from "./AllUsers";
+import { default as AllTeacher } from "./AddTeacher";
 import MySubjects from "./MySubjects";
 import Schedule from "./Schedule";
 
@@ -21,6 +22,7 @@ export {
   Profile,
   Students,
   Teachers,
+  AllTeacher,
   AllUsers,
   MySubjects,
   Schedule,

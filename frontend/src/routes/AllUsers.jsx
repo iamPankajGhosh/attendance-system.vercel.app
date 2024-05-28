@@ -11,14 +11,26 @@ export default function AllUsers() {
         const response = await axios.get(
           "http://localhost:8000/api/v1/users/allusers"
         );
-        console.log(response.data);
         setPeople(response.data);
       } catch (error) {
         console.error(error);
       }
     };
     fetchPeople();
-  }, []);
+  }, [people]);
+
+  const deleteUser = async (e) => {
+    e.preventDefault();
+    const userId = e.target.id;
+    try {
+      await axios.post("http://localhost:8000/api/v1/users/deleteuser", {
+        userId,
+      });
+      alert("User deleted successfully");
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <div className="container flex">
@@ -48,8 +60,11 @@ export default function AllUsers() {
                       >
                         Role
                       </th>
-                      <th scope="col" className="relative px-4 py-3.5">
-                        <span className="sr-only">Edit</span>
+                      <th
+                        scope="col"
+                        className="px-12 py-3.5 text-left text-sm font-normal text-gray-700"
+                      >
+                        Action
                       </th>
                     </tr>
                   </thead>
@@ -79,6 +94,16 @@ export default function AllUsers() {
                           <div className="text-sm text-gray-900 ">
                             {person.role.toUpperCase()}
                           </div>
+                        </td>
+                        <td className="whitespace-nowrap px-12 py-4">
+                          <button
+                            id={person._id}
+                            type="button"
+                            className="rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-600/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600"
+                            onClick={deleteUser}
+                          >
+                            Delete
+                          </button>
                         </td>
                       </tr>
                     ))}

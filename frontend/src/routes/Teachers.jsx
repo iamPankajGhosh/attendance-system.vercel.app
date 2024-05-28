@@ -1,9 +1,13 @@
 import { useEffect, useState } from "react";
 import { Sidebar } from "../components";
 import axios from "axios";
+import { ArrowRight } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 export default function Teachers() {
+  const navigate = useNavigate();
   const [people, setPeople] = useState([]);
+  const role = localStorage.getItem("role");
 
   useEffect(() => {
     const fetchPeople = async () => {
@@ -26,8 +30,19 @@ export default function Teachers() {
       <section className="mx-auto w-full max-w-7xl px-4 py-4">
         <div className="flex flex-col space-y-4 md:flex-row md:items-center md:justify-between md:space-y-0">
           <div>
-            <h2 className="text-lg font-semibold">All Students</h2>
+            <h2 className="text-lg font-semibold">All Teachers</h2>
           </div>
+
+          {role === "admin" && (
+            <button
+              type="button"
+              className="inline-flex items-center rounded-md bg-black px-3 py-2 text-sm font-semibold text-white hover:bg-black/80"
+              onClick={() => navigate("/addteacher")}
+            >
+              Add teachers
+              <ArrowRight className="ml-2 h-4 w-4" />
+            </button>
+          )}
         </div>
         <div className="mt-6 flex flex-col">
           <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -48,8 +63,11 @@ export default function Teachers() {
                       >
                         Role
                       </th>
-                      <th scope="col" className="relative px-4 py-3.5">
-                        <span className="sr-only">Edit</span>
+                      <th
+                        scope="col"
+                        className="px-12 py-3.5 text-left text-sm font-normal text-gray-700"
+                      >
+                        Teacher Id
                       </th>
                     </tr>
                   </thead>
@@ -78,6 +96,11 @@ export default function Teachers() {
                         <td className="whitespace-nowrap px-12 py-4">
                           <div className="text-sm text-gray-900 ">
                             {person.role.toUpperCase()}
+                          </div>
+                        </td>
+                        <td className="whitespace-nowrap px-12 py-4">
+                          <div className="text-sm text-gray-900 ">
+                            {person.teacherId}
                           </div>
                         </td>
                       </tr>

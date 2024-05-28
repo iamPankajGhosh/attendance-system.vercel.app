@@ -1,18 +1,23 @@
 import { Schema, model } from "mongoose";
 
-const attendanceSchema = new Schema({
-  studentId: {
-    type: Schema.Types.ObjectId,
-    ref: "Student",
+const attendanceSchema = new Schema(
+  {
+    studentId: {
+      type: Schema.Types.ObjectId,
+      ref: "Student",
+    },
+    date: {
+      type: String,
+    },
+    present: {
+      type: Boolean,
+      required: true,
+    },
   },
-  date: {
-    type: String,
-  },
-  present: {
-    type: Boolean,
-    required: true,
-  },
-});
+  {
+    timestamps: true,
+  }
+);
 
 const studentSchema = new Schema(
   {

@@ -27,14 +27,16 @@ export default function Login() {
     await axios
       .post("http://localhost:8000/api/v1/users/login", formData)
       .then((res) => {
-        if (res.data === "success") {
-          const token = Math.random().toString(36).substring(2);
-          localStorage.setItem("token", token);
-          navigate("/allusers");
+        if (res.data.success) {
+          localStorage.setItem("token", res.data.userId);
+          navigate("/profile");
           setIsLoading(false);
         }
       })
-      .catch((err) => console.log(err));
+      .catch(() => {
+        alert("Error", "Email or password is incorrect");
+        setIsLoading(false);
+      });
   };
   return (
     <section>
@@ -44,8 +46,6 @@ export default function Login() {
             <h2 className="text-3xl font-bold leading-tight text-purple-950 sm:text-4xl">
               Log in
             </h2>
-
-            {console.log(role)}
 
             {role !== "admin" && (
               <p className="mt-2 text-sm text-gray-600">

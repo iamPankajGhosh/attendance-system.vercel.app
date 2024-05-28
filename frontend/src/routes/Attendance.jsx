@@ -6,8 +6,6 @@ export default function Attendance() {
   const [people, setPeople] = useState([]);
   const [semester, setSemester] = useState("1st");
   const [isLoading, setIsLoading] = useState(false);
-  const [isMarked, setIsMarked] = useState(false);
-  const [isWaiting, setIsWaiting] = useState(false);
 
   useEffect(() => {
     const fetchPeople = async () => {
@@ -29,24 +27,26 @@ export default function Attendance() {
     fetchPeople();
   }, [semester]);
 
-  const markAttendance = async (studentId) => {
-    console.log(studentId);
+  const markAttendance = async (e) => {
+    const button = e.target;
+    const studentId = button.id;
+    button.innerText = "Marking...";
 
     try {
-      setIsWaiting(true);
       const response = await axios.post(
         "http://localhost:8000/api/v1/students/attendance",
         { studentId }
       );
 
       if (response.data === "success") {
-        setIsWaiting(false);
-        setIsMarked(true);
+        button.innerText = "Done";
+        button.disabled = true;
+        button.style.backgroundColor = "green";
+        button.style.color = "white";
       }
     } catch (error) {
       console.error(error);
       setIsLoading(false);
-      setIsWaiting(false);
     }
   };
 
@@ -100,13 +100,19 @@ export default function Attendance() {
                           scope="col"
                           className="px-12 py-3.5 text-left text-sm font-normal text-gray-700"
                         >
-                          Roll
+                          Roll Number
                         </th>
                         <th
                           scope="col"
                           className="px-12 py-3.5 text-left text-sm font-normal text-gray-700"
                         >
-                          Sem
+                          Semester
+                        </th>
+                        <th
+                          scope="col"
+                          className="px-12 py-3.5 text-left text-sm font-normal text-gray-700"
+                        >
+                          Status
                         </th>
                       </tr>
                     </thead>
@@ -147,25 +153,19 @@ export default function Attendance() {
                               {person.semester}
                             </div>
                           </td>
-                          <td className="whitespace-nowrap px-12 py-4">
-                            {!isMarked ? (
-                              <button
-                                type="button"
-                                className="rounded-md border border-black px-3 py-2 text-sm font-semibold text-black shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
-                                onClick={() => {
-                                  markAttendance(person._id);
-                                }}
-                              >
-                                {!isWaiting ? "Present" : "Waiting..."}
-                              </button>
-                            ) : (
-                              <button
-                                type="button"
-                                className="rounded-md bg-green-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-green-600/80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600"
-                              >
-                                Done
-                              </button>
-                            )}
+                          <td className="flex items-center gap-3 whitespace-nowrap px-12 py-4">
+                            <button
+                              id={person._id}
+                              type="button"
+                              className="rounded-md border border-black px-3 py-2 text-sm font-semibold text-black shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+                              onClick={markAttendance}
+                            >
+                              Present
+                            </button>
+                            <div className="text-sm text-gray-700">
+                              🎒
+                              {person.attendance.length}
+                            </div>
                           </td>
                         </tr>
                       ))}
